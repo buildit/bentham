@@ -51,14 +51,16 @@ functions:
     events:
       - http:
           method: get
-          path: slack-oauth-initiate  
+          path: slack-oauth-initiate
+          cors: true  
 
   slack-oauth-complete:
     handler: src/main/slack/handler.oauthComplete
     events:
       - http:
-          method: get
+          method: post
           path: slack-oauth-complete
+          cors: true
 
   # Dropbox
   dropbox-webhook-challenge:
@@ -79,17 +81,17 @@ functions:
     handler: src/main/dropbox/handler.oauthInitiate
     events:
       - http:
-          method: get
+          method: post
           path: dropbox-oauth-initiate
-
+          cors: true
 
   dropbox-oauth-complete:
     handler: src/main/dropbox/handler.oauthComplete
     events:
       - http:
-          method: get
+          method: post
           path: dropbox-oauth-complete
-
+          cors: true
 
   dropbox-user-report:
     handler: src/main/dropbox/handler.userReport
@@ -111,15 +113,17 @@ functions:
     handler: src/main/github/handler.oauthInitiate
     events:
       - http:
-          method: get
+          method: post
           path: github-oauth-initiate
+          cors: true
 
   github-oauth-complete:
     handler: src/main/github/handler.oauthComplete
     events:
       - http:
-          method: get
+          method: post
           path: github-oauth-complete
+          cors: true
 
 resources:
   Resources:

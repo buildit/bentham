@@ -43,11 +43,13 @@ var githubPostLogin = new Vue({
 
 
 function getIcarusTokenWithGithub(githubAuthorisationCode, icarusAccessToken) {
-  var lambdaUri = lambdaPath + "/github-oauth-complete?code=" + githubAuthorisationCode
-      + '&icarusAccessToken=' + icarusAccessToken
-      + '&initReturnUri=' + siteBasePath + '/github-post-login.html'; // This is the return uri used when initiating the OAuth journey; for verification only
-  axios.get(lambdaUri)
-    .then(function(response) {
+  var initReturnUri = siteBasePath + '/github-post-login.html'; // This is the return uri used when initiating the OAuth journey; for verification only
+
+  axios.post(lambdaPath + '/github-oauth-complete',{
+    code: githubAuthorisationCode,
+    icarusAccessToken: icarusAccessToken,
+    initReturnUri: initReturnUri,
+  }).then(function(response) {
       console.log(response);
       githubPostLogin.processToken(response.data);
     })

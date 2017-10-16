@@ -5,6 +5,7 @@ import { OAuthService } from "../../../main/github/services/OAuthService";
 import { OAuthEndpoint } from "../../../main/github/endpoints/OAuthEndpoint";
 import { IcarusUserToken } from "../../../main/common/Api";
 import { mock, instance, when, verify, anyString } from 'ts-mockito';
+import { stringify as formStringify} from "querystring"
 
 
 const icarusUserToken:IcarusUserToken = {
@@ -16,7 +17,7 @@ const icarusUserToken:IcarusUserToken = {
 
 const mockedOauthService = mock(OAuthService);
 const oauthService = instance(mockedOauthService);
-when(mockedOauthService.getOAuthAuthoriseUri(anyString(), anyString(), anyString(), anyString())).thenReturn("http://oauth-uri");
+when(mockedOauthService.getOAuthAuthoriseUri(anyString(), anyString())).thenReturn("http://oauth-uri");
 when(mockedOauthService.processCode(anyString(), anyString(), anyString())).thenReturn(Promise.resolve(icarusUserToken));
 
 const endpoint = new OAuthEndpoint(oauthService);
@@ -28,17 +29,14 @@ describe("Github OAuth Endpoint", () => {
   it("should redirect an 'initiate' request to the GitHub API", async () => {
       const result = await toPromise(_initiate, {
         headers: {
-          Host: "aws-api"
+          'Content-Type': 'application/x-www-form-urlencoded'  
         },
-        requestContext: {
-          stage: 'lambda-stage'
-        },
-        queryStringParameters: {
+        body: formStringify({
           icarusAccessToken: "icarus-access-token",
           returnUri: 'http://return.uri'
-        }
+        }),
       });
-      verify(mockedOauthService.getOAuthAuthoriseUri("aws-api", "lambda-stage", "icarus-access-token", 'http://return.uri')).once();
+      verify(mockedOauthService.getOAuthAuthoriseUri( "icarus-access-token", 'http://return.uri')).once();
 
       expect(result.statusCode).to.equal(302);
       expect(result.headers.Location).to.equal("http://oauth-uri");
@@ -47,16 +45,13 @@ describe("Github OAuth Endpoint", () => {
   it("should return an Icarus User Token including GitHub username on completion", async () => {
     const result = await toPromise(_complete, {
       headers: {
-        Host: "aws-api"
+        'Content-Type': 'application/x-www-form-urlencoded'
       },
-      requestContext: {
-        stage: 'lambda-stage'
-      },
-      queryStringParameters: {
+      body: formStringify({
         code: "github-auth-code",
         icarusAccessToken: "icarus-access-token",
         initReturnUri: 'http://return.uri'
-      }
+      }),
     });
 
     verify(mockedOauthService.processCode("icarus-access-token", "github-auth-code", 'http://return.uri')).once();

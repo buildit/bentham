@@ -8,7 +8,7 @@ export class GithubClient {
     private readonly clientId: githubClientId,
     private readonly clientSecret: gihubClientSecret) {}
 
-    getOAuthAuthoriseUri(host: host, stage:lambdaStage, icarusAccessToken: icarusAccessToken, returnUri: uri): uri {
+    getOAuthAuthoriseUri(icarusAccessToken: icarusAccessToken, returnUri: uri): uri {
       return  'https://github.com/login/oauth/authorize' +
       `?client_id=${this.clientId}` +
       `&redirect_uri=${returnUri}` +

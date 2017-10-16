@@ -13,8 +13,8 @@ export class OAuthService {
     private readonly tokenRepository: TokenRepository,
     private readonly cursorRepository: CursorRepository) {}
 
-  getOAuthAuthoriseUri(host: host, stage:lambdaStage, icarusAccessToken: icarusAccessToken, returnUri:uri): uri {
-    return this.dropbox.getOAuthAuthoriseUri(host, stage, icarusAccessToken, returnUri);
+  getOAuthAuthoriseUri( icarusAccessToken: icarusAccessToken, returnUri:uri): uri {
+    return this.dropbox.getOAuthAuthoriseUri(icarusAccessToken, returnUri);
   }
 
   /**

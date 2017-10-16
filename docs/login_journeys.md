@@ -24,7 +24,11 @@ This journey happens when the user is not logged in (i.e. the browser LS has no 
 
 3. User: authorises the application to access Slack
 4. Browser redirected back to `<post-login-page-url>?code=<slack-authorisation-code>`
-5. **post-login.html**, Browser (AJAX) GET, `<slack-oauth-complete-lambda>?code=<slack-authorisation-code>&returnUri=<post-login-page-url>`
+5. **post-login.html**, Browser (AJAX) POST, `<slack-oauth-complete-lambda>` (as `application/json`)
+    * Body: 
+        * `code`: `<slack-authorisation-code>`
+        * `returnUri`: `<post-login-page-url>`
+        
     * `returnUri` is required for verification, by Slack
 
 6. **slack-oath-complete-lambda**:
@@ -74,7 +78,10 @@ This journey happens when the user is logged into Icarus with Slack, but not yet
 (i.e. the browser LS has an `<icarus-user-token>` without `dropboxAccountId`).
 
 1. **index.html**, Browser, User clicks Dropbox login button
-  * Browser goes to `<dropbox-oauth-initiate-lambda>?icarusAccessToken=<icarus-access-token>&returnUri=<post-dropbox-login-page-url>`
+  * Browser POST to `<dropbox-oauth-initiate-lambda>` (as `application/x-www-form-urlencoded`)
+    * Body:
+        * `icarusAccessToken`: `<icarus-access-token>`
+        * `returnUri`: `<post-dropbox-login-page-url>`
 
 2. **dropbox-oauth-initiate-lambda**:
     * Gets OAuth Authorisation Code from Dropbox authorise endpoint
@@ -87,8 +94,11 @@ This journey happens when the user is logged into Icarus with Slack, but not yet
     * `state=<icarus-access-token>` is not used by the current implementation
 
 5. **dropbox-post-login.html**,
-    * Browser (AJAX) GET, `<dropbox-auth-complete-lambda>?code=<dropbox-authorisation-code>&icarusAccessToken=<icarus-access-token>&initReturnUri=<post-dropbox-login-page-url>`
-    * `initReturnUri` must match the oauth initiate returnUri and is used for verification by Dropbox
+    * Browser (AJAX) POST, `<dropbox-auth-complete-lambda>` (as `application/json`)
+        * Body:
+            * `code`: `<dropbox-authorisation-code>`
+            * `icarusAccessToken`: `<icarus-access-token>`
+            * `initReturnUri`: `<post-dropbox-login-page-url>`, must match the oauth initiate returnUri and is used for verification by Dropbox
 
 6. **dropbox-oauth-complete-lambda**
     1. Redeems `<dropbox-authorisation-code>` getting a `<dropbox-access-token>` and `<dropbox-account-id>`, via Dropbox API
@@ -124,7 +134,10 @@ Similarly to Dropbox, the GitHub login journey happens when the user is logged i
 The flow is almost identical to the Dropbox flow.
 
 1. **index.html**, Browser, User clicks GitHub login button
-  * Browser goes to `<github-oauth-initiate-lambda>?icarusAccessToken=<icarus-access-token>&returnUri=<github-post-login-page-url>`
+  * Browser POST to `<github-oauth-initiate-lambda>` (as `application/x-www-form-urlencoded`)
+        * Body:
+            * `icarusAccessToken`: `<icarus-access-token>`
+            * `returnUri`: `<github-post-login-page-url>`
 
 2. **github-oauth-initiate-lambda**:
     * Gets OAuth Authorisation Code from Dropbox authorise endpoint
@@ -137,8 +150,11 @@ The flow is almost identical to the Dropbox flow.
     * `state=<icarus-access-token>` is not used by the current implementation
 
 5. **github-post-login.html**,
-    * Browser (AJAX) GET, `<github-auth-complete-lambda>?code=<github-authorisation-code>&icarusAccessToken=<icarus-access-token>&initReturnUri=<github-post-login-page-url>`
-    * `initReturnUri` must match the oauth initiate returnUri and is used for verification by Github
+    * Browser (AJAX) POST, `<github-auth-complete-lambda>` (as `application/json`)
+        * Body:
+            * `code`: `<github-authorisation-code>`
+            * `icarusAccessToken`: `<icarus-access-token>`
+            * `initReturnUri`: `<github-post-login-page-url>`, must match the oauth initiate returnUri and is used for verification by Github
 
 6. **github-oauth-complete-lambda**
     1. Redeems `<github-authorisation-code>` getting a `<github-access-token>`, via Github OAuth Access Token endpoint

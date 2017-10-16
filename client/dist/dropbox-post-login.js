@@ -43,11 +43,13 @@ var dropboxPostLogin = new Vue({
 
 
 function getIcarusTokenWithDropbox(dropboxAuthorisationCode, icarusAccessToken) {
-  var lambdaUri = lambdaPath + "/dropbox-oauth-complete?code=" + dropboxAuthorisationCode
-      + '&icarusAccessToken=' + icarusAccessToken
-      + '&initReturnUri=' + siteBasePath + '/dropbox-post-login.html'; // This is the return uri used when initiating the OAuth journey; for verification only
-  axios.get(lambdaUri)
-    .then(function(response) {
+  var initReturnUri = siteBasePath + '/dropbox-post-login.html'; // This is the return uri used when initiating the OAuth journey; for verification only
+
+  axios.post(lambdaPath + '/dropbox-oauth-complete', {
+    code: dropboxAuthorisationCode,
+    icarusAccessToken: icarusAccessToken,
+    initReturnUri: initReturnUri,
+  }).then(function(response) {
       console.log(response);
       dropboxPostLogin.processToken(response.data);
     })

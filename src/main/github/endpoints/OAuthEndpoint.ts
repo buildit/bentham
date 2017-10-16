@@ -1,4 +1,4 @@
-import { complete, response } from "../../common/endpoints/EndpointUtils";
+import { complete, response, parseBody } from "../../common/endpoints/EndpointUtils";
 import { event, callback, icarusAccessToken, uri, host, lambdaStage } from "../../common/Api";
 import { pathToLambda, redirectTo } from "../../common/clients/HttpClient";
 import { OAuthService } from "../services/OAuthService";
@@ -14,22 +14,23 @@ export class OAuthEndpoint {
 
   // Initiate OAuth flow sending the user to the GithHub Authorise endpoint
   initiate(callback: callback, event: event) {
-    const host:host = event.headers.Host
-    const stage:lambdaStage = event.requestContext.stage
-    const icarusAccessToken:icarusAccessToken = event.queryStringParameters.icarusAccessToken
-    const returnUri:uri = event.queryStringParameters.returnUri
 
-    callback(null, redirectTo(this.oauthService.getOAuthAuthoriseUri(host, stage, icarusAccessToken, returnUri)));
+
+    const body = parseBody(event)
+    const icarusAccessToken:icarusAccessToken = body.icarusAccessToken
+    const returnUri:uri = body.returnUri
+
+
+    callback(null, redirectTo(this.oauthService.getOAuthAuthoriseUri(icarusAccessToken, returnUri)));
   }
 
+  // Complete OAuth flow, redeeming Github auth code and adding Github identity to the user
   complete(cb: callback, event: event) {
-    const host:host = event.headers.Host
-    const stage:lambdaStage = event.requestContext.stage
-
-    const icarusAccessToken:icarusAccessToken = event.queryStringParameters.icarusAccessToken
-    const githubAuthorisationCode:githubAuthorisationCode = event.queryStringParameters.code
-    const initReturnUri:uri = event.queryStringParameters.initReturnUri
-
+    const body = parseBody(event)
+    const icarusAccessToken:icarusAccessToken = body.icarusAccessToken
+    const githubAuthorisationCode:githubAuthorisationCode = body.code
+    const initReturnUri:uri = body.initReturnUri
+    
     return complete(cb, this.oauthService.processCode(icarusAccessToken, githubAuthorisationCode, initReturnUri)
       .then((icarusUserToken) => response(200, icarusUserToken))
     );

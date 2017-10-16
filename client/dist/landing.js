@@ -39,14 +39,20 @@ var landing = new Vue({
     dropboxLogin: function() {
       var icarusAccessToken = Vue.ls.get("icarus_user_token").accessToken;
       var returnPageUri = siteBasePath + '/dropbox-post-login.html';
-      var authInitiateUri = lambdaPath + '/dropbox-oauth-initiate?icarusAccessToken=' + icarusAccessToken + '&returnUri=' + returnPageUri;
-      window.location.href = authInitiateUri;
+      var authInitiateUri = lambdaPath + '/dropbox-oauth-initiate';
+      postForm(lambdaPath + '/dropbox-oauth-initiate', {
+        icarusAccessToken: icarusAccessToken,
+        returnUri: returnPageUri,
+      })
+
     },
     githubLogin: function() {
       var icarusAccessToken = Vue.ls.get("icarus_user_token").accessToken;
       var returnPageUri = siteBasePath + '/github-post-login.html';
-      var authInitiateUri = lambdaPath + '/github-oauth-initiate?icarusAccessToken=' + icarusAccessToken + '&returnUri=' + returnPageUri;
-      window.location.href = authInitiateUri;
+      postForm(lambdaPath + '/github-oauth-initiate', {
+        icarusAccessToken: icarusAccessToken,
+        returnUri: returnPageUri,        
+      })
     },
   }
 });

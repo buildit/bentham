@@ -34,10 +34,11 @@ var postLogin = new Vue({
 
 function getIcarusToken(slackAuthorisationCode) {
   var initReturnPageUri = siteBasePath + '/post-login.html';
-  var slackOauthCompleteLambdaUri = lambdaPath + "/slack-oauth-complete?code=" + slackAuthorisationCode + '&returnUri=' + initReturnPageUri;
 
-  axios.get(slackOauthCompleteLambdaUri)
-    .then(function(response) {
+  axios.post(lambdaPath + '/slack-oauth-complete', {
+    code: slackAuthorisationCode,
+    returnUri: initReturnPageUri,
+  }).then(function(response) {
       console.log(response);
       postLogin.processToken(response.data);
     })

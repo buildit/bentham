@@ -19,7 +19,7 @@ export class DropboxClient {
     private readonly clientId: dropboxClientId,
     private readonly clientSecret: dropboxClientSecret) {}
 
-  getOAuthAuthoriseUri(host: host, stage:lambdaStage, icarusAccessToken: icarusAccessToken, returnUri: uri): uri {
+  getOAuthAuthoriseUri(icarusAccessToken: icarusAccessToken, returnUri: uri): uri {
     return "https://www.dropbox.com/oauth2/authorize?response_type=code" +
     `&client_id=${this.clientId}` +
     `&redirect_uri=${returnUri}` +

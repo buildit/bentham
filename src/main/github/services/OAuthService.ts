@@ -11,8 +11,8 @@ export class OAuthService {
     private readonly github: GithubClient,
     private readonly tokenRepository: TokenRepository) {}
 
-  getOAuthAuthoriseUri(host: host, stage:lambdaStage, icarusAccessToken:icarusAccessToken, returnUri:uri): uri {
-    return this.github.getOAuthAuthoriseUri(host, stage, icarusAccessToken, returnUri);
+  getOAuthAuthoriseUri(icarusAccessToken:icarusAccessToken, returnUri:uri): uri {
+    return this.github.getOAuthAuthoriseUri(icarusAccessToken, returnUri);
   }
 
   /*
