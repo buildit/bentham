@@ -12,6 +12,8 @@ export class IntegrationsPage {
             .withText('Link Github account');
         this.linkedGitHubHeader = Selector('.panel-success > .panel-heading')
             .withText('Icarus is monitoring your Github activity');
+        this.forgetMeButton = Selector('button')
+            .withText('Forget Me');
         this.logoutButton = Selector('button')
             .withText('Logout');
     }
@@ -30,5 +32,9 @@ export class IntegrationsPage {
 
     async linkDropbox () {
         await t.click(this.linkDropboxButton);
+    }
+
+    async forgetMe() {
+        await t.click(this.forgetMeButton);
     }
 }

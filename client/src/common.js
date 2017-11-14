@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+import { paths } from './core/config';
 
 export const getUserToken = () => {
     const userToken = Vue.ls.get("user_token")
