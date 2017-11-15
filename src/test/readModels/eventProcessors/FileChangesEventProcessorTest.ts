@@ -32,6 +32,33 @@ describe('File Changes DynamoDB table event processors', () => {
         expect(fileChangeEvents[0].timestamp).to.deep.equal(new Date('2017-10-25T10:13:22Z'))
         expect(fileChangeEvents[1].timestamp).to.deep.equal(new Date('2017-10-25T10:13:25Z'))
     })
+
+    it('should ignore an invalid event without user_id', async() => {
+        await toPromise(_handler, dynamoDbStreamEventWithoutUserId)
+        
+        const [ fileChangeEvents ] = capture(userActivityStatsServiceMock.processDropboxFileChangeEvents).last()
+        
+        verify(userActivityStatsServiceMock.processDropboxFileChangeEvents(anything())).once()
+
+        expect(fileChangeEvents).to.be.empty
+    })
+
+    it('should ignore an invalid event without timestamp', async() => {
+        await toPromise(_handler, dynamoDbStreamEventWithoutTimestamp)
+        
+        const [ fileChangeEvents ] = capture(userActivityStatsServiceMock.processDropboxFileChangeEvents).last()
+        
+        verify(userActivityStatsServiceMock.processDropboxFileChangeEvents(anything())).once()
+
+        expect(fileChangeEvents).to.be.empty
+    })    
+    
+    it('should silently ignore totally malformed events', async() => { 
+        await toPromise(_handler, totallyUnexpectedEvent)
+        const [ fileChangeEvents ] = capture(userActivityStatsServiceMock.processDropboxFileChangeEvents).last()
+        verify(userActivityStatsServiceMock.processDropboxFileChangeEvents(anything())).once()
+        expect(fileChangeEvents).to.be.empty
+    })
 })
 
 
@@ -111,4 +138,86 @@ const dynamoDbStreamEventWith2Records = {
             "eventSourceARN": "arn:aws:dynamodb:us-east-1:0000:table/icarus-temp-dropbox_file_changes/stream/2017-10-25T09:40:54.513"
         }
     ]
+}
+
+const dynamoDbStreamEventWithoutUserId = {
+    "Records": [
+        {
+            "eventID": "ccad192a5b8d7ce8df412e2242f43833",
+            "eventName": "INSERT",
+            "eventVersion": "1.1",
+            
+            "eventSource": "aws:dynamodb",
+            "awsRegion": "us-east-1",
+            "dynamodb": {
+                "ApproximateCreationDateTime": 1508926380,
+                "Keys": {
+                    "account_id": {
+                        "S": "dropbox-id-A"
+                    },
+                    "timestamp": {
+                        "S": "2017-10-25T10:13:22Z"
+                    }
+                },
+                "NewImage": {
+                    "account_id": {
+                        "S": "dropbox-id-A"
+                    },
+                    "type": {
+                        "S": "file"
+                    },
+                    "timestamp": {
+                        "S": "2017-10-26T09:23:45Z"
+                    }
+                },
+                "SequenceNumber": "100000000003735008969",
+                "SizeBytes": 79,
+                "StreamViewType": "KEYS_ONLY"
+            },
+            "eventSourceARN": "arn:aws:dynamodb:us-east-1:0000:table/icarus-temp-dropbox_file_changes/stream/2017-10-25T09:40:54.513"
+        }
+    ]
+}
+
+const dynamoDbStreamEventWithoutTimestamp = {
+    "Records": [
+        {
+            "eventID": "ccad192a5b8d7ce8df412e2242f43833",
+            "eventName": "INSERT",
+            "eventVersion": "1.1",
+            
+            "eventSource": "aws:dynamodb",
+            "awsRegion": "us-east-1",
+            "dynamodb": {
+                "ApproximateCreationDateTime": 1508926380,
+                "Keys": {
+                    "account_id": {
+                        "S": "dropbox-id-A"
+                    },
+                    "timestamp": {
+                        "S": "2017-10-25T10:13:22Z"
+                    }
+                },
+                "NewImage": {
+                    "account_id": {
+                        "S": "dropbox-id-A"
+                    },
+                    "type": {
+                        "S": "file"
+                    },
+                    "user_id": {
+                        "S": "my-dropbox-id"
+                    }
+                },
+                "SequenceNumber": "100000000003735008969",
+                "SizeBytes": 79,
+                "StreamViewType": "KEYS_ONLY"
+            },
+            "eventSourceARN": "arn:aws:dynamodb:us-east-1:0000:table/icarus-temp-dropbox_file_changes/stream/2017-10-25T09:40:54.513"
+        }
+    ]
+}
+
+const totallyUnexpectedEvent = {
+    foo: 'bar'
 }

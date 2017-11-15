@@ -12,3 +12,5 @@ export function processUserEventsAndRespond( userEvents:any[], userEventProcesso
             cb(err, "unable-to-process") 
         })    
 }
+
+export const isDynamoDbEvent = (event): boolean => Array.isArray(event.Records || {})
