@@ -25,11 +25,11 @@ const toGithubEvents = (event: event): GithubEvent[] => {
         .filter( record => isValidGithubEventRecord(record) )
         .map( record => ({
             githubUsername: record.dynamodb.NewImage.username.S, 
-        timestamp: new Date( record.dynamodb.NewImage.timestamp.S )
+            timestamp: new Date( record.dynamodb.NewImage.event_timestamp.S )
     }))
 }
 
 const isValidGithubEventRecord = (record): boolean => {
     const newImage = (((record || {}).dynamodb || {}).NewImage || {})
-    return ( newImage ) ? ((newImage.username || {}).S) && ((newImage.timestamp || {}).S) : false;
+    return ( newImage ) ? ((newImage.username || {}).S) && ((newImage.event_timestamp || {}).S) : false;
 }

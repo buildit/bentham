@@ -86,7 +86,7 @@ const dynamoDbStreamEventWith2Records = {
                     "id": {
                         "S": "nicusX-056bf065948a2403aefa2e354fa"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-26T13:02:47+01:00"
                     },
                     "username": {
@@ -119,7 +119,7 @@ const dynamoDbStreamEventWith2Records = {
                     "id": {
                         "S": "nicusX-0ce7232ef34f25d262b7c53ef5af"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-26T13:02:30+01:00"
                     },
                     "username": {
@@ -158,7 +158,7 @@ const dynamoDbStreamEventWithoutUsername = {
                     "id": {
                         "S": "nicusX-056bf065948a2403aefa2e354fa"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-26T13:02:47+01:00"
                     }
                 },

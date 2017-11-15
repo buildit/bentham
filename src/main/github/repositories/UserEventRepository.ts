@@ -24,10 +24,10 @@ export class UserEventRepository {
 
   async store(event: UserEvent): Promise<void> {
     const storedEvent = {
-      id: event.id,
-      event_type: event.eventType,
-      username: event.username,
-      timestamp: event.timestamp,
+      "id": event.id,
+      "event_type": event.eventType,
+      "username": event.username,
+      "event_timestamp": event.timestamp,
     }
 
     console.log(`Storing a '${event.eventType}'`)

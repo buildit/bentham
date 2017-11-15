@@ -25,12 +25,12 @@ export class FileChangesEventProcessor {
             .filter( record => isValidFileChangeEventRecord(record))
             .map( record => ({
                 dropboxUserId: record.dynamodb.NewImage.user_id.S, 
-                timestamp: new Date( record.dynamodb.Keys.timestamp.S )
+                timestamp: new Date( record.dynamodb.Keys.event_timestamp.S )
         }))
     }
 }
 
 const isValidFileChangeEventRecord = (record): boolean => {
     const newImage = (((record || {}).dynamodb || {}).NewImage || {})
-    return ( newImage ) ? ((newImage.user_id || {}).S) && ((newImage.timestamp || {}).S) : false;
+    return ( newImage ) ? ((newImage.user_id || {}).S) && ((newImage.event_timestamp || {}).S) : false;
 }

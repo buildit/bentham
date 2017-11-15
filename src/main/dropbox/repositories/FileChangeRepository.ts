@@ -13,8 +13,8 @@ export class FileChangeRepository {
     const items = changeList.map(entry => ({
       "account_id": accountId,
       "user_id": entry.modifiedBy,
-      timestamp: entry.modifiedAt,
-      type: entry.tag
+      "event_timestamp": entry.modifiedAt,
+      "event_type": entry.tag
     }));
 
     console.log(`Writing items to DynamoDB for account ${accountId}`);

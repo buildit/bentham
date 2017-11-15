@@ -38,7 +38,7 @@ export class IdentityRepository {
     console.log(`Writing Dropbox identity for Slack ID: ${slackId} to DynanoDB`)
     return this.dynamo.put(identitiesTable, {
       slack_id: slackId,
-      type: IdentityType.Dropbox,
+      integration_type: IdentityType.Dropbox,
       account_id: dropboxIdentity.id,
       access_token: dropboxIdentity.accessToken
     }).then(res =>  dropboxIdentity )
@@ -51,7 +51,7 @@ export class IdentityRepository {
     console.log(`Writing Github identity for Slack ID: ${slackId} to DynanoDB`)
     return this.dynamo.put(identitiesTable, {
       slack_id: slackId,
-      type: IdentityType.Github,
+      integration_type: IdentityType.Github,
       account_id: githubIdentity.id,
       access_token: githubIdentity.accessToken
     }).then(res => githubIdentity)
@@ -62,7 +62,7 @@ export class IdentityRepository {
     console.log(`Writing Slack identity for SlackID: ${slackIdentity.id}`)
     return this.dynamo.put(identitiesTable, {
       slack_id: slackIdentity.id,
-      type: IdentityType.Slack,
+      integration_type: IdentityType.Slack,
       account_id: slackIdentity.id, // For Slack Identity account_id == slack_id, obviously
       access_token: slackIdentity.accessToken,
       user_name: slackIdentity.userName,
@@ -75,7 +75,7 @@ export class IdentityRepository {
     console.log(`Deleting an Identity of type "${type} for SlackID: ${slackId} from DynamoDB`)
     return this.dynamo.delete(identitiesTable, {
       slack_id: slackId,
-      type: type
+      integration_type: type
     })     
   }
 
@@ -124,7 +124,7 @@ export class IdentityRepository {
     return this.dynamo.get(identitiesTable, 
       { 
         slack_id: slackId,
-        type: IdentityType.Slack
+        integration_type: IdentityType.Slack
       })
     .then( result => {
       if(result)
@@ -157,10 +157,7 @@ export class IdentityRepository {
 
     return this.dynamo.query(identitiesTable, {
       IndexName: 'identity_by_account_id_and_type',
-      ExpressionAttributeNames: {
-        '#identityType': 'type' // Required as 'type' is a reserved word :()
-      },
-      KeyConditionExpression: 'account_id = :accountId AND type = #identityType',
+      KeyConditionExpression: 'account_id = :accountId AND integration_type = :identityType',
       ExpressionAttributeValues: {
         ':accountId': identityAccountId, 
         ':identityType': identityType
@@ -184,7 +181,7 @@ export class IdentityRepository {
     return this.dynamo.get(identitiesTable, 
       { 
         slack_id: slackId,
-        type: IdentityType.Dropbox 
+        integration_type: IdentityType.Dropbox 
       })
     .then( results => {
       if( results ) {
@@ -206,7 +203,7 @@ export class IdentityRepository {
     return this.dynamo.get(identitiesTable, 
       { 
         slack_id: slackId,
-        type: IdentityType.Github
+        integration_type: IdentityType.Github
       })
     .then( results => {
       if( results ) {
@@ -228,7 +225,7 @@ export class IdentityRepository {
 
     return this.dynamo.query(identitiesTable, {
       IndexName: 'identity_by_account_id_and_type',
-      KeyConditionExpression: 'account_id = :accountId AND type = :identityType',
+      KeyConditionExpression: 'account_id = :accountId AND integration_type = :identityType',
       ExpressionAttributeValues: {
         ':accountId': dropboxId, 
         ':identityType': IdentityType.Dropbox
@@ -254,7 +251,7 @@ export class IdentityRepository {
 
     return this.dynamo.query(identitiesTable, {
       IndexName: 'identity_by_account_id_and_type',
-      KeyConditionExpression: 'account_id = :accountId AND type = :identityType',
+      KeyConditionExpression: 'account_id = :accountId AND integration_type = :identityType',
       ExpressionAttributeValues: {
         ':accountId': githubUsername, 
         ':identityType': IdentityType.Github

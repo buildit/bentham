@@ -77,7 +77,7 @@ const dynamoDbStreamEventWith2Records = {
                     "account_id": {
                         "S": "dropbox-id-A"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-25T10:13:22Z"
                     }
                 },
@@ -88,10 +88,10 @@ const dynamoDbStreamEventWith2Records = {
                     "user_id": {
                         "S": "my-dropbox-id"
                     },
-                    "type": {
+                    "event_type": {
                         "S": "file"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-26T09:23:45Z"
                     }
                 },
@@ -113,7 +113,7 @@ const dynamoDbStreamEventWith2Records = {
                     "account_id": {
                         "S": "dropbox-id-B"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-25T10:13:25Z"
                     }
                 },
@@ -124,10 +124,10 @@ const dynamoDbStreamEventWith2Records = {
                     "user_id": {
                         "S": "my-dropbox-id"
                     },
-                    "type": {
+                    "event_type": {
                         "S": "file"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-26T09:23:45Z"
                     }
                 },
@@ -155,7 +155,7 @@ const dynamoDbStreamEventWithoutUserId = {
                     "account_id": {
                         "S": "dropbox-id-A"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-25T10:13:22Z"
                     }
                 },
@@ -163,10 +163,10 @@ const dynamoDbStreamEventWithoutUserId = {
                     "account_id": {
                         "S": "dropbox-id-A"
                     },
-                    "type": {
+                    "event_type": {
                         "S": "file"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-26T09:23:45Z"
                     }
                 },
@@ -194,7 +194,7 @@ const dynamoDbStreamEventWithoutTimestamp = {
                     "account_id": {
                         "S": "dropbox-id-A"
                     },
-                    "timestamp": {
+                    "event_timestamp": {
                         "S": "2017-10-25T10:13:22Z"
                     }
                 },
@@ -202,7 +202,7 @@ const dynamoDbStreamEventWithoutTimestamp = {
                     "account_id": {
                         "S": "dropbox-id-A"
                     },
-                    "type": {
+                    "event_type": {
                         "S": "file"
                     },
                     "user_id": {
