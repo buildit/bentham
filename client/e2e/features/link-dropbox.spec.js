@@ -37,7 +37,7 @@ test
     ('Linking Dropbox account should navigate to the Dropbox Sign In page if the given user is not logged into Dropbox', async (t) => {
         integrationsPage.linkDropbox();
 
-        await t.expect(dropboxSignInPage.form.header.innerText).eql('Sign in to Dropbox to link to icarus-dev');
+        await t.expect(dropboxSignInPage.form.header.innerText).eql(`Sign in to Dropbox to link to icarus-${process.env.ICARUS_STAGE}`);
 
         const baseUrl = await getBaseUrl();
         const redirectUri = await getQueryString('redirect_uri');
@@ -69,7 +69,7 @@ test
     ('Linking Dropbox account should navigate to the Dropbox auth page when signed in with Dropbox but Icarus has no permissions', async (t) => {
         dropboxSignInPage.login(process.env.DROPBOX_TEST_USER_ID, process.env.DROPBOX_TEST_USER_PASSWORD);
 
-        await t.expect(dropboxAuthPage.appName.innerText).eql('icarus-dev');
+        await t.expect(dropboxAuthPage.appName.innerText).eql(`icarus-${process.env.ICARUS_STAGE}`);
 
         const redirectUri = await getQueryString('redirect_uri');
     
@@ -130,5 +130,26 @@ test
 
         await t
             .expect(integrationsPage.linkDropboxButton.exists).notOk()
-            .expect(integrationsPage.linkedDropboxHeader.exists).ok();
+            .expect(integrationsPage.linkedDropboxHeader.exists).ok()
+            .expect(integrationsPage.forgetMeButton.exists).ok();
     });    
+
+test
+    .before(async (t) => {
+        integrationsPage.login();
+        
+        await t.expect(slackSignInPage.domain.innerText).eql('icarus-ai');
+
+        slackSignInPage.login(process.env.SLACK_TEST_USER_ID, process.env.SLACK_TEST_USER_PASSWORD);
+
+        await t.expect(slackAuthPage.form.authorizeButton.exists).ok();
+        
+        slackAuthPage.authorize();
+
+        await t.expect(integrationsPage.forgetMeButton.exists).ok();
+    })
+    ('Forget Me should unlink the Dropbox account and log the user out from Icarus', async (t) => {
+        integrationsPage.forgetMe();
+
+        await t.expect(integrationsPage.loginButton.exists).ok();
+    }); 

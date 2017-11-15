@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 import VueLocalStorage from 'vue-ls';
-
+import { paths } from './core/config';
 
 Vue.use(VueRouter);
 Vue.use(VueLocalStorage, {
@@ -25,11 +25,6 @@ import Integrations from "./components/Integrations.vue"
 Vue.component('integrations', Integrations)
 
 console.log('Environment:', process.env)
-
-const paths = {
-  siteBasePath:  window.location.origin,
-  lambdaPath:  `https://${process.env.API_DOMAIN}/${process.env.LAMBDA_STAGE}`
-}
 
 const routes = [
   { path: '/', component: Integrations, props: paths },
