@@ -157,7 +157,10 @@ export class IdentityRepository {
 
     return this.dynamo.query(identitiesTable, {
       IndexName: 'identity_by_account_id_and_type',
-      KeyConditionExpression: 'account_id = :accountId AND type = :identityType',
+      ExpressionAttributeNames: {
+        '#identityType': 'type' // Required as 'type' is a reserved word :()
+      },
+      KeyConditionExpression: 'account_id = :accountId AND type = #identityType',
       ExpressionAttributeValues: {
         ':accountId': identityAccountId, 
         ':identityType': identityType
