@@ -117,7 +117,10 @@ export class IdentityService {
             this.repo.deleteGithubIdentity(slackId),
             this.repo.deleteSlackIdentity(slackId),
             this.repo.deleteIcarusAccount(slackId)
-          ]).then( res => { return } )
+          ]).then( res => {
+            console.log(`Slack ID ${slackId}: All identities and access tokens successfully deleted`) 
+            return 
+          })
         } else {
           throw Error('Invalid Icarus access Token')
         }

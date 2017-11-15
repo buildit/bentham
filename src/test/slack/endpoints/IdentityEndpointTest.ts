@@ -31,7 +31,7 @@ describe('Identity endpoint', () => {
     })
     
 
-    it('should return 403 when the access token header is missing', async () => {
+    it('should return 400 when the access token header is missing', async () => {
         const identityServiceMock = mock(IdentityService)
         const identityService = instance(identityServiceMock)
         
@@ -42,12 +42,12 @@ describe('Identity endpoint', () => {
 
         const result = await toPromise(_forgetMe, {});
 
-        expect(result.statusCode).to.equal(403);
+        expect(result.statusCode).to.equal(400);
 
         verify(identityServiceMock.forgetUser(anything())).never()
     })    
 
-    it('should return 403 when the access token is invalid', async () => {
+    it('should return 204 even when the access token is invalid', async () => {
         const identityServiceMock = mock(IdentityService)
         const identityService = instance(identityServiceMock)
 
@@ -62,7 +62,7 @@ describe('Identity endpoint', () => {
             }
           });
 
-        expect(result.statusCode).to.equal(403);
+        expect(result.statusCode).to.equal(204);
 
         verify(identityServiceMock.forgetUser('invalid token')).once()
     })     

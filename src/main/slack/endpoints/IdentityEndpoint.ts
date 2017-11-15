@@ -11,7 +11,7 @@ export class IdentityEndpoint {
      * 
      * Expects icarus access token as 'X-AccessToken' header
      * 
-     * If the acces token is present and valid, silently accepts it returning 204, regardless the user has been deleted.
+     * If the acces token is present, it silently returns 204, regardless the user has been deleted.
      */
     forgetMe(cb: callback, event: event) {
         const icarusAccessToken:icarusAccessToken|undefined = xAccessTokenHeader(event)
@@ -20,12 +20,13 @@ export class IdentityEndpoint {
             complete(cb, this.service.forgetUser(icarusAccessToken)
                 .then( res => response(204))
                 .catch( err => {
+                    // There was an issue, maybe the token was not valid, but we are silently returning 204 regardless
                     console.error(err)
-                    return response(403, 'Unauthorized' ) // Returns unauthorised on any error
+                    return response(204) 
                 }))
         } else {
             console.log('No access token header in request')
-            sendResponse(cb, response(403, 'Unauthorized' ))      
+            sendResponse(cb, response(400, 'Missing access token' ))      
         }
     }
 } 
