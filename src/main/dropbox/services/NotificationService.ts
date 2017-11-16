@@ -40,7 +40,10 @@ export class FileUpdateRecorder {
   private async lookupDropboxToken(accountId: dropboxAccountId): Promise<string|null> {
     return this.identityRepository.getDropboxIdentityByDropboxId(accountId)
       .then( dropboxIdentity => dropboxIdentity.accessToken )
-      .catch(err => null )
+      .catch(err => {
+        console.error(err)
+        return null
+      } )
   }
 
    async recordUpdates(accountId: dropboxAccountId): Promise<void> {

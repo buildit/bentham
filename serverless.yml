@@ -30,7 +30,7 @@ provider:
         - arn:aws:dynamodb:*:*:table/${self:provider.environment.ACCOUNTS_TABLE}
         - arn:aws:dynamodb:*:*:table/${self:provider.environment.IDENTITIES_TABLE}
         - arn:aws:dynamodb:*:*:table/${self:provider.environment.ACCOUNTS_TABLE}/index/slack_id_by_access_token
-        - arn:aws:dynamodb:*:*:table/${self:provider.environment.IDENTITIES_TABLE}/index/slack_id_by_account_id_and_type
+        - arn:aws:dynamodb:*:*:table/${self:provider.environment.IDENTITIES_TABLE}/index/identity_by_account_id_and_type
     # For listening to DynamoDB Streams
     - Effect: Allow
       Action:
@@ -465,14 +465,14 @@ resources:
         AttributeDefinitions:
           - AttributeName: slack_id
             AttributeType: S
-          - AttributeName: type
+          - AttributeName: integration_type
             AttributeType: S
           - AttributeName: account_id
             AttributeType: S
         KeySchema:
           - AttributeName: slack_id
             KeyType: HASH
-          - AttributeName: type
+          - AttributeName: integration_type
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
@@ -482,7 +482,7 @@ resources:
             KeySchema:
             - AttributeName: account_id
               KeyType: HASH
-            - AttributeName: type
+            - AttributeName: integration_type
               KeyType: RANGE
             Projection:
               ProjectionType: ALL
@@ -513,12 +513,12 @@ resources:
         AttributeDefinitions:
           - AttributeName: account_id
             AttributeType: S
-          - AttributeName: timestamp
+          - AttributeName: event_timestamp
             AttributeType: S
         KeySchema:
           - AttributeName: account_id
             KeyType: HASH
-          - AttributeName: timestamp
+          - AttributeName: event_timestamp
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 5
@@ -536,7 +536,7 @@ resources:
             AttributeType: S
           - AttributeName: "username"
             AttributeType: S
-          - AttributeName: "timestamp"
+          - AttributeName: "event_timestamp"
             AttributeType: S
         KeySchema:
           - AttributeName: "id"
@@ -546,7 +546,7 @@ resources:
             KeySchema:
             - AttributeName: "username"
               KeyType: HASH
-            - AttributeName: "timestamp"
+            - AttributeName: "event_timestamp"
               KeyType: RANGE
             Projection:
               ProjectionType: ALL

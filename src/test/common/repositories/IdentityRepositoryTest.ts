@@ -82,7 +82,7 @@ describe('Identity repository', () => {
             expect(table).is.equal('identities')
             expect(params).to.be.deep.include({
                 slack_id: 'slack-id',
-                type: 'D',
+                integration_type: 'D',
                 account_id: 'dropbox-id',
                 access_token: 'dropbox access token'
             })
@@ -103,7 +103,7 @@ describe('Identity repository', () => {
             expect(table).is.equal('identities')
             expect(params).to.be.deep.include({
                 slack_id: 'slack-id',
-                type: 'D',
+                integration_type: 'D',
             })
 
             verify(dynamoClientMock.delete(anyString(), anything())).once()            
@@ -131,7 +131,7 @@ describe('Identity repository', () => {
             expect(table).is.equal('identities')
             expect(params).to.be.deep.include({
                 slack_id: 'slack-id',
-                type: 'G',
+                integration_type: 'G',
                 account_id: 'github-username',
                 access_token: 'github access token'
             })
@@ -152,7 +152,7 @@ describe('Identity repository', () => {
             expect(table).is.equal('identities')
             expect(params).to.be.deep.include({
                 slack_id: 'slack-id',
-                type: 'G',
+                integration_type: 'G',
             })
 
             verify(dynamoClientMock.delete(anyString(), anything())).once()            
@@ -182,7 +182,7 @@ describe('Identity repository', () => {
             expect(table).is.equal('identities')
             expect(params).to.be.deep.include({
                 slack_id: 'slack-id',
-                type: 'S',
+                integration_type: 'S',
                 account_id: 'slack-id',
                 team_id: 'slack-team-id',
                 user_name: 'slack User Name',
@@ -205,7 +205,7 @@ describe('Identity repository', () => {
             expect(table).is.equal('identities')
             expect(params).to.be.deep.include({
                 slack_id: 'slack-id',
-                type: 'S',
+                integration_type: 'S',
             })
 
             verify(dynamoClientMock.delete(anyString(), anything())).once()            
@@ -227,7 +227,7 @@ describe('Identity repository', () => {
             when(dynamoClientMock.query(anyString(), anything())).thenReturn(Promise.resolve([ { slack_id: 'slack-id' } ]))
             when(dynamoClientMock.get(anyString(), anything())).thenReturn( Promise.resolve({
                 slack_id: 'slack-id',
-                type: 'S',
+                integration_type: 'S',
                 account_id: 'slack-id',
                 access_token: 'slack access token',
                 team_id: 'slack-team-id',
@@ -248,7 +248,7 @@ describe('Identity repository', () => {
             expect(tableGet).is.equal('identities')
             expect(paramsGet).to.deep.include({
                 slack_id: 'slack-id',
-                type: 'S'
+                integration_type: 'S'
             })   
             
             verify(dynamoClientMock.query(anyString(), anything())).once()
@@ -314,7 +314,7 @@ describe('Identity repository', () => {
             expect(tableGet).is.equal('identities')
             expect(paramsGet).to.deep.include({
                 slack_id: 'slack-id',
-                type: 'S'
+                integration_type: 'S'
             }) 
             
             verify(dynamoClientMock.query(anyString(), anything())).once()
@@ -381,7 +381,7 @@ describe('Identity repository', () => {
             expect(tableGet).is.equal('identities')
             expect(paramsGet).to.deep.include({
                 slack_id: 'slack-id',
-                type: 'S'
+                integration_type: 'S'
             }) 
             
             verify(dynamoClientMock.query(anyString(), anything())).once()
@@ -440,7 +440,7 @@ describe('Identity repository', () => {
             expect(tableGet).is.equal('identities')
             expect(paramsGet).to.deep.include({
                 slack_id: 'slack-id',
-                type: 'D'
+                integration_type: 'D'
             })
             
             verify(dynamoClientMock.get(anyString(), anything())).once()
@@ -483,7 +483,7 @@ describe('Identity repository', () => {
             expect(tableGet).is.equal('identities')
             expect(paramsGet).to.deep.include({
                 slack_id: 'slack-id',
-                type: 'G'
+                integration_type: 'G'
             })
             
             verify(dynamoClientMock.get(anyString(), anything())).once()

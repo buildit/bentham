@@ -37,7 +37,7 @@ describe('The Github User Event Repository', () => {
 
       expect(actualDbEvent.id).is.equal('user-event-id')
       expect(actualDbEvent.username).is.equal('github-username')
-      expect(actualDbEvent.timestamp).is.equal('2017-09-26T14:54:38+01:00')
+      expect(actualDbEvent.event_timestamp).is.equal('2017-09-26T14:54:38+01:00')
 
     })
   })
