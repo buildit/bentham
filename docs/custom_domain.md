@@ -32,7 +32,7 @@ Obviously, if `<ICARUS_SITE_BASE_DOMAIN>` is also the base domain of  `<ICARUS_D
 
 Unless you have a paid certificate, see [here](./free_ssl_certificates.md) to generate one for free and load it into ACM.
 
-### Create the lambdas custom domain
+### Create API custom domain
 
 Once the cerfificate is loaded in ACM, you may use it for Lamda API Gateway endpoints.
 
