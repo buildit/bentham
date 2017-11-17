@@ -39,6 +39,8 @@ A [Travis CI](https://travis-ci.org/) manifest is provided.
 
 See [detailed info about AWS requirements and setup](./docs/aws.md)
 
+Attention: no expensive resource is used by this project, but many of them are not in any free tier. 
+Also, it costs money if you keep the database instance running.
 
 ## Development lifecycle
 
