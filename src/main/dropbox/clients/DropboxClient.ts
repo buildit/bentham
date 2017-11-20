@@ -75,10 +75,10 @@ export class DropboxClient {
   async fetchFiles(accountId: dropboxAccountId, token: dropboxAccessToken, cursor: cursor): Promise<FileFetchResult> {
     console.log(`Fetching files for account ${accountId}`);
 
-    var result = await this.listFolderContinue(token, cursor);
+    let result = await this.listFolderContinue(token, cursor);
     console.log(result);
 
-    var entries = result.entries;
+    let entries = result.entries;
     while (result.has_more) {
       console.log(`Fetching more files at cursor ${result.cursor}`);
 
