@@ -3,9 +3,9 @@ import 'mocha';
 import { mock, instance, when, verify, resetCalls, anyString,  anything } from 'ts-mockito';
 
 import { OAuthService } from "../../../main/github/services/OAuthService";
-import { IdentityService } from "../../../main/common/services/IdentityService"
+import { IdentityService } from "../../../main/identity/services/IdentityService"
 import { GithubClient } from "../../../main/github/clients/GithubClient";
-import { GithubIdentity } from "../../../main/common/Api"
+import { GithubIdentity } from "../../../main/identity/Api"
 
 const identityServiceMock = mock(IdentityService)
 const identityService = instance(identityServiceMock)

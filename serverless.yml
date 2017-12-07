@@ -178,9 +178,9 @@ functions:
             headers:
               - X-AccessToken          
 
-  # DynamoDB event processors: builds Read Models
+  # DynamoDB event processors: builds read models
   file-changes-event-processor:
-    handler: src/main/readModels/handler.fileChangesEvents
+    handler: src/main/reads/handler.fileChangesEvents
     vpc:
       securityGroupIds:
         - "Fn::GetAtt": ServerlessSecurityGroup.GroupId
@@ -196,7 +196,7 @@ functions:
               - StreamArn
 
   github-events-processor:
-    handler: src/main/readModels/handler.githubEvents
+    handler: src/main/reads/handler.githubEvents
     vpc:
       securityGroupIds:
         - "Fn::GetAtt": ServerlessSecurityGroup.GroupId
@@ -213,7 +213,7 @@ functions:
 
   # Reports
   user-activity-distribution:
-    handler: src/main/readModels/handler.userActivityDistribition
+    handler: src/main/reads/handler.userActivityDistribition
     vpc:
       securityGroupIds:
         - "Fn::GetAtt": ServerlessSecurityGroup.GroupId

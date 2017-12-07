@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { mock, instance, when, anyString, verify, anything } from 'ts-mockito';
 import { IdentityEndpoint  } from "../../../main/slack/endpoints/IdentityEndpoint";
-import { IdentityService } from "../../../main/common/services/IdentityService";
+import { IdentityService } from "../../../main/identity/services/IdentityService";
 
 
 

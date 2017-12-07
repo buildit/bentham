@@ -3,7 +3,7 @@ Classes in this module handle the protocol-level tasks of handling Events and re
 */
 import { complete, response, sendResponse, redirectToResponse, parseBody } from "../../common/endpoints/EndpointUtils";
 import { event, callback, host, uri, lambdaStage, icarusAccessToken } from "../../common/Api";
-import { IdentityService } from "../../common/services/IdentityService";
+import { IdentityService } from "../../identity/services/IdentityService";
 import { pathToLambda } from "../../common/clients/HttpClient";
 import { OAuthService } from "../services/OAuthService";
 import { dropboxAccountId, dropboxAuthorisationCode } from "../Api"

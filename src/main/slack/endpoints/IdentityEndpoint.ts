@@ -1,6 +1,6 @@
 import { callback, event, icarusAccessToken } from "../../common/Api";
 import { complete, response, sendResponse, xAccessTokenHeader } from "../../common/endpoints/EndpointUtils";
-import { IdentityService } from "../../common/services/IdentityService"
+import { IdentityService } from "../../identity/services/IdentityService"
 
 export class IdentityEndpoint {
 

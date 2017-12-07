@@ -1,5 +1,5 @@
 import { complete, response, sendResponse, redirectToResponse, parseBody } from "../../common/endpoints/EndpointUtils";
-import { event, callback, icarusAccessToken, uri, host, lambdaStage } from "../../common/Api";
+import { event, callback, uri, host, lambdaStage, icarusAccessToken } from "../../common/Api";
 import { pathToLambda } from "../../common/clients/HttpClient";
 import { OAuthService } from "../services/OAuthService";
 import { githubAuthorisationCode } from "../Api"

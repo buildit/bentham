@@ -7,8 +7,8 @@ import { mock, instance, when, verify, capture, resetCalls, anyString, anything 
 
 
 import { MySqlClient } from "../../../main/common/clients/MySqlClient";
-import { UserActivityCountRepository } from "../../../main/readModels/repositories/UserActivityCountRepository"
-import { UserActivity } from "../../../main/readModels/Api"
+import { UserActivityCountRepository } from "../../../main/reads/repositories/UserActivityCountRepository"
+import { UserActivity } from "../../../main/reads/Api"
 
 describe('User Activity counts repository', () => {
 
