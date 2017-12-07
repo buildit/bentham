@@ -4,9 +4,9 @@ import { mock, instance, when, verify, capture, resetCalls, anyString,  anything
 
 import { OAuthService } from "../../../main/dropbox/services/OAuthService";
 import { CursorRepository } from "../../../main/dropbox/repositories/CursorRepository";
-import { IdentityService } from "../../../main/common/services/IdentityService"
+import { IdentityService } from "../../../main/identity/services/IdentityService"
 import { DropboxClient } from "../../../main/dropbox/clients/DropboxClient";
-import { DropboxIdentity } from "../../../main/common/Api"
+import { DropboxIdentity } from "../../../main/identity/Api"
 import { DropboxAccessDetails } from "../../../main/dropbox/Api"
 
 

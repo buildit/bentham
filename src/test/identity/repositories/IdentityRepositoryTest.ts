@@ -3,8 +3,8 @@ import 'mocha';
 import { mock, instance, when, verify, capture, resetCalls, anyString, anything } from 'ts-mockito';
 
 import { DynamoClient } from "../../../main/common/clients/DynamoClient";
-import { IdentityRepository } from "../../../main/common/repositories/IdentityRepository"
-import { SlackIdentity, DropboxIdentity, GithubIdentity } from "../../../main/common/Api"
+import { IdentityRepository } from "../../../main/identity/repositories/IdentityRepository"
+import { SlackIdentity, DropboxIdentity, GithubIdentity } from "../../../main/identity/Api"
 
 function mocks(): [ DynamoClient,  IdentityRepository ] {
     const dynamoClientMock = mock(DynamoClient)

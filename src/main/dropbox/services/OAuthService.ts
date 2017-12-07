@@ -1,7 +1,8 @@
-import { IdentityService } from "../../common/services/IdentityService";
+import { IdentityService } from "../../identity/services/IdentityService";
 import { DropboxClient } from "../clients/DropboxClient";
 import { CursorRepository } from "../repositories/CursorRepository";
-import { icarusAccessToken, host, uri, lambdaStage, IcarusUserToken } from "../../common/Api";
+import { host, uri, lambdaStage, icarusAccessToken } from "../../common/Api";
+import { IcarusUserToken } from "../../identity/Api";
 import { dropboxAuthorisationCode, dropboxAccountId, dropboxAccessToken, cursor } from "../Api";
 
 export class OAuthService {

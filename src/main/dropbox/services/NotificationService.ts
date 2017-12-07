@@ -2,7 +2,7 @@ import { dropboxAccountId } from "../Api";
 import { DropboxClient } from "../clients/DropboxClient";
 import { CursorRepository } from "../repositories/CursorRepository";
 import { FileChangeRepository } from "../repositories/FileChangeRepository";
-import { IdentityRepository } from "../../common/repositories/IdentityRepository"
+import { IdentityRepository } from "../../identity/repositories/IdentityRepository"
 
 export interface ListFolder {
   accounts: Array<string>

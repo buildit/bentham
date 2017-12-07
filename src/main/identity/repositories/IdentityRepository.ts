@@ -1,5 +1,6 @@
-import { GithubIdentity, DropboxIdentity, slackAccessToken, SlackIdentity, icarusAccessToken } from "../Api";
-import { DynamoClient } from "../clients/DynamoClient";
+import { icarusAccessToken } from "../../common/Api";
+import { GithubIdentity, DropboxIdentity, slackAccessToken, SlackIdentity } from "../Api";
+import { DynamoClient } from "../../common/clients/DynamoClient";
 
 
 const accountsTable = 'accounts'

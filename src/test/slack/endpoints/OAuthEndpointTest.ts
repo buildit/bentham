@@ -2,7 +2,7 @@ import { toPromise } from '../../common/TestUtils';
 import { expect } from 'chai';
 import 'mocha';
 import { slackAuthCode, slackToken } from "../../../main/slack/Api";
-import { DropboxIdentity, GithubIdentity, IcarusUserToken } from "../../../main/common/Api";
+import { DropboxIdentity, GithubIdentity, IcarusUserToken } from "../../../main/identity/Api";
 import { OAuthService } from "../../../main/slack/services/OAuthService";
 import { OAuthEndpoint } from "../../../main/slack/endpoints/OAuthEndpoint";
 import { mock, instance, when, verify, resetCalls, anyString } from "ts-mockito";

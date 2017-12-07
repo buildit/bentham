@@ -2,9 +2,9 @@ import { expect, assert } from 'chai';
 import 'mocha';
 import { mock, instance, when, verify, capture, resetCalls, anyString, anything } from 'ts-mockito';
 
-import { UserActivityCountRepository } from "../../../main/readModels/repositories/UserActivityCountRepository"
-import { IdentityRepository } from "../../../main/common/repositories/IdentityRepository"
-import { UserActivityStatsService, DropboxFileChangeEvent, GithubEvent } from "../../../main/readModels/services/UserActivityStatsService"
+import { UserActivityCountRepository } from "../../../main/reads/repositories/UserActivityCountRepository"
+import { IdentityRepository } from "../../../main/identity/repositories/IdentityRepository"
+import { UserActivityStatsService, DropboxFileChangeEvent, GithubEvent } from "../../../main/reads/services/UserActivityStatsService"
 
 describe('User Activity stats service', () => {
 

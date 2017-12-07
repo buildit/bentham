@@ -2,9 +2,10 @@ import { expect } from 'chai';
 import 'mocha';
 import { mock, instance, when, verify, resetCalls, anyString,  anything } from 'ts-mockito';
 
-import { IdentityService } from "../../../main/common/services/IdentityService"
-import { IdentityRepository } from "../../../main/common/repositories/IdentityRepository"
-import { slackAccessToken, IdentitySet, SlackIdentity, DropboxIdentity, GithubIdentity, IcarusUserToken, icarusAccessToken } from "../../../main/common/Api";
+import { IdentityService } from "../../../main/identity/services/IdentityService"
+import { IdentityRepository } from "../../../main/identity/repositories/IdentityRepository"
+import { icarusAccessToken } from "../../../main/common/Api"
+import { slackAccessToken, IdentitySet, SlackIdentity, DropboxIdentity, GithubIdentity, IcarusUserToken } from "../../../main/identity/Api";
 
 const slackIdentity:SlackIdentity = {
   id: 'slack-account-id',

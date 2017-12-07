@@ -1,7 +1,8 @@
 import { UserActivityCountRepository } from "../repositories/UserActivityCountRepository"
 import { UserActivity } from "../Api"
-import { SlackIdentity, icarusAccessToken } from "../../common/Api";
-import { IdentityRepository } from "../../common/repositories/IdentityRepository"
+import { icarusAccessToken } from "../../common/Api"
+import { SlackIdentity } from "../../identity/Api";
+import { IdentityRepository } from "../../identity/repositories/IdentityRepository"
 
 interface UserEvent {
     timestamp: Date

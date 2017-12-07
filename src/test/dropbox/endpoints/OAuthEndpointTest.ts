@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import 'mocha';
 import { OAuthService } from "../../../main/dropbox/services/OAuthService";
 import { OAuthEndpoint } from "../../../main/dropbox/endpoints/OAuthEndpoint";
-import { IcarusUserToken } from "../../../main/common/Api";
+import { IcarusUserToken } from "../../../main/identity/Api";
 import { mock, instance, when, verify, anyString } from 'ts-mockito';
 import { stringify as formStringify} from "querystring"
 

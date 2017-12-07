@@ -3,8 +3,8 @@ import 'mocha';
 import { mock, instance, when, verify, capture, resetCalls, anyString, anything } from 'ts-mockito';
 import { toPromise } from '../../common/TestUtils';
 
-import { UserActivityStatsService, DropboxFileChangeEvent } from "../../../main/readModels/services/UserActivityStatsService"
-import { GithubEventProcessor } from "../../../main/readModels/eventProcessors/GithubEventProcessor"
+import { UserActivityStatsService, DropboxFileChangeEvent } from "../../../main/reads/services/UserActivityStatsService"
+import { GithubEventProcessor } from "../../../main/reads/eventProcessors/GithubEventProcessor"
 
 const userActivityStatsServiceMock = mock(UserActivityStatsService)
 const userActivityStatsService = instance(userActivityStatsServiceMock)

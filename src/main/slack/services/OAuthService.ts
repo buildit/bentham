@@ -1,7 +1,8 @@
 import { slackAuthCode } from "../Api";
 import { SlackClient } from "../clients/SlackClient";
-import { IdentityService } from "../../common/services/IdentityService";
-import { IcarusUserToken, uri } from "../../common/Api";
+import { IdentityService } from "../../identity/services/IdentityService";
+import { uri } from "../../common/Api";
+import { IcarusUserToken } from "../../identity/Api";
 
 export class OAuthService {
 

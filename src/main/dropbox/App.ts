@@ -13,8 +13,8 @@ import { OAuthEndpoint } from "./endpoints/OAuthEndpoint";
 import { HttpClient } from "../common/clients/HttpClient";
 import { CursorRepository } from "./repositories/CursorRepository";
 import { FileChangeRepository } from "./repositories/FileChangeRepository";
-import { IdentityRepository } from "../common/repositories/IdentityRepository";
-import { IdentityService } from "../common/services/IdentityService";
+import { IdentityRepository } from "../identity/repositories/IdentityRepository";
+import { IdentityService } from "../identity/services/IdentityService";
 
 
 // Repositories

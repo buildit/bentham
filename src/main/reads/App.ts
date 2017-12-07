@@ -1,4 +1,4 @@
-import { IdentityRepository } from "../common/repositories/IdentityRepository";
+import { IdentityRepository } from "../identity/repositories/IdentityRepository";
 import { DynamoClient } from "../common/clients/DynamoClient";
 import { MySqlClient } from "../common/clients/MySqlClient"
 import { FileChangesEventProcessor } from "./eventProcessors/FileChangesEventProcessor";

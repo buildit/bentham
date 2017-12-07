@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import 'mocha';
 import { slackAuthCode, slackToken } from "../../../main/slack/Api";
 import { SlackClient } from "../../../main/slack/clients/SlackClient";
-import { DropboxIdentity, SlackIdentity, IdentitySet, IcarusUserToken } from "../../../main/common/Api";
-import { IdentityService} from "../../../main/common/services/IdentityService";
+import { DropboxIdentity, SlackIdentity, IdentitySet, IcarusUserToken } from "../../../main/identity/Api";
+import { IdentityService} from "../../../main/identity/services/IdentityService";
 import { OAuthService } from "../../../main/slack/services/OAuthService";
 import { mock, instance, when, verify, anyString, anything } from "ts-mockito";
 

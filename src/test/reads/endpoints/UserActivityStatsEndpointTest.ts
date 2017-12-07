@@ -1,8 +1,8 @@
 import { toPromise } from '../../common/TestUtils';
 import { expect } from 'chai';
 import 'mocha';
-import { UserActivityStatsEndpoint } from "../../../main/readModels/endpoints/UserActivityStatsEndpoint";
-import { UserActivityStatsService } from "../../../main/readModels/services/UserActivityStatsService";
+import { UserActivityStatsEndpoint } from "../../../main/reads/endpoints/UserActivityStatsEndpoint";
+import { UserActivityStatsService } from "../../../main/reads/services/UserActivityStatsService";
 import { mock, instance, when, anyString, verify } from 'ts-mockito';
 
 const report = [

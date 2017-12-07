@@ -1,7 +1,8 @@
 
-import { IdentityService } from "../../common/services/IdentityService";
+import { IdentityService } from "../../identity/services/IdentityService";
 import { GithubClient } from "../clients/GithubClient";
-import { icarusAccessToken, host, uri, lambdaStage, IcarusUserToken } from "../../common/Api";
+import { host, uri, lambdaStage, icarusAccessToken } from "../../common/Api";
+import { IcarusUserToken } from "../../identity/Api";
 import { githubAuthorisationCode, githubUsername, githubAccessToken } from "../Api";
 
 export class OAuthService {
