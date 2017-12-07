@@ -3,9 +3,9 @@ import { HttpClient } from "../common/clients/HttpClient"
 import { GithubClient } from "./clients/GithubClient"
 
 import { UserEventRepository } from "./repositories/UserEventRepository"
-import { IdentityRepository } from "../common/repositories/IdentityRepository"
+import { IdentityRepository } from "../identity/repositories/IdentityRepository"
 
-import { IdentityService } from "../common/services/IdentityService"
+import { IdentityService } from "../identity/services/IdentityService"
 import { WebhookEventService } from "./services/WebhookEventService"
 import { OAuthService } from "./services/OAuthService"
 
