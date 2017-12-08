@@ -7,6 +7,14 @@ addons:
     packages:
      - google-chrome-stable fluxbox
 
+  artifacts:
+    debug: true
+    working_dir: screenshots
+    target_paths: $TRAVIS_BUILD_NUMBER
+    bucket: icarus-build-report # FIXME Should be a parameter
+    s3_region: "us-east-1"
+
+
 language: node_js
 node_js:
   - "6"

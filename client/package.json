@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "yarn dev",
     "build": "node build/build.js",
-    "e2e": "testcafe chrome e2e/features/*.spec.js -e"
+    "e2e": "testcafe chrome e2e/features/*.spec.js --skip-js-errors --screenshots-on-fails --screenshots ../screenshots"
   },
   "dependencies": {
     "axios": "^0.17.0",
