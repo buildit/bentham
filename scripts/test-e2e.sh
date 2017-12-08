@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ -z "$ICARUS_STAGE" ]; then
+if [ -z "$ICARUS_STAGE"] && [ -z "$FORCE_E2E"]; then
   echo "Skipping end-to-end tests as code is not deployed";
   exit 0;
 fi
