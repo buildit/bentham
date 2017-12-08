@@ -9,9 +9,8 @@ addons:
 
   artifacts:
     debug: true
-    working_dir: screenshots
     target_paths: $TRAVIS_BUILD_NUMBER
-    bucket: icarus-build-report # FIXME Should be a parameter
+    bucket: icarus-build-report
     s3_region: "us-east-1"
 
 
