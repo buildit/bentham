@@ -9,9 +9,11 @@ addons:
 
   artifacts:
     debug: true
+    paths:
+      - ./screenshots
     target_paths: $TRAVIS_BUILD_NUMBER
     bucket: icarus-build-report
-    s3_region: "us-east-1"
+    s3_region: us-east-1
 
 
 language: node_js
