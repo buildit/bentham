@@ -12,7 +12,7 @@ addons:
     paths:
       - ./screenshots
     target_paths: $TRAVIS_BUILD_NUMBER
-    bucket: icarus-build-report
+    bucket: icarus-build-reports
     s3_region: us-east-1
 
 
