@@ -14,6 +14,8 @@ export class SlackSignInPage {
         await t
             .typeText(this.form.emailInput, email)
             .typeText(this.form.passwordInput, password)
-            .click(this.form.signInButton);
+            .takeScreenshot()
+            .click(this.form.signInButton)
+            .takeScreenshot();
     }
 }

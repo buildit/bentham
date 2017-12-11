@@ -28,11 +28,11 @@ test.only
 
         slackSignInPage.login(process.env.SLACK_TEST_USER_ID, process.env.SLACK_TEST_USER_PASSWORD);
 
-        await t.expect(slackAuthPage.form.authorizeButton.exists).ok('Continue (authorize) button missing on Slack auth page', { timeout: 8000 });
+        await t.expect(slackAuthPage.form.authorizeButton.exists).ok('Continue (authorize) button missing on Slack auth page');
         
         slackAuthPage.authorize();
 
-        await t.expect(integrationsPage.linkDropboxButton.exists).ok('Link to Dropbox button missing');
+        await t.expect(integrationsPage.linkDropboxButton.exists).ok();
     })
     ('Linking Dropbox account should navigate to the Dropbox Sign In page if the given user is not logged into Dropbox', async (t) => {
         integrationsPage.linkDropbox();
