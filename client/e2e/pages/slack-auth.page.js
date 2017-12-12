@@ -9,9 +9,7 @@ export class SlackAuthPage {
     }
 
     async authorize () {
-        await t
-            .takeScreenshot()
-            .click(this.form.authorizeButton);
+        await t.click(this.form.authorizeButton);
     }
 
     async cancel () {

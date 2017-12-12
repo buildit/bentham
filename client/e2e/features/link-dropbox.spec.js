@@ -26,11 +26,11 @@ test.only
         
         await t.expect(slackSignInPage.domain.innerText).eql('icarus-ai');
 
-        slackSignInPage.login(process.env.SLACK_TEST_USER_ID, process.env.SLACK_TEST_USER_PASSWORD);
+        await slackSignInPage.login(process.env.SLACK_TEST_USER_ID, process.env.SLACK_TEST_USER_PASSWORD);
 
         await t.expect(slackAuthPage.form.authorizeButton.exists).ok('Continue (authorize) button missing on Slack auth page');
         
-        slackAuthPage.authorize();
+        await slackAuthPage.authorize();
 
         await t.expect(integrationsPage.linkDropboxButton.exists).ok();
     })
